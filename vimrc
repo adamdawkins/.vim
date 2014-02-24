@@ -65,13 +65,16 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*Cap
 
 " leader c: clear search 
 map <leader>c :let @/=''<cr>
-" Simple CSS Align function
-map <leader>a :SCSSA<cr>
 
 map <leader>r :%s/>\zs\ze</\r/g<cr>
 
 map <leader>p :CommandT<cr>
 map <leader>b :CommandTBuffer<cr>
+
+vmap <leader>a :SCSSA<cr>
+
+" uncomment line (for foundation_and_overrides.scss"
+map <leader>u mu^v2lr `u
 
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
