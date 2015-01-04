@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/adamdawkins/development/newin/myfashioninbox/lib/config'
+let g:netrw_dirhist_2='/Users/adamdawkins/development/newin/myfashioninbox/users/new'
+let g:netrw_dirhist_3='/Users/adamdawkins/development/newin/myfashioninbox/users'
+let g:netrw_dirhist_4='/Users/adamdawkins/development/newin/myfashioninbox/users/lib'
+let g:netrw_dirhist_5='/Users/adamdawkins/development/mint-velvet/applications/mvdb-enricher/lib'
+let g:netrw_dirhist_6='/Users/adamdawkins/development/mint-velvet/applications/mvdb-enricher/lib/enrichers'
+let g:netrw_dirhist_7='/Users/adamdawkins/development/mint-velvet/applications/mvdb-enricher/bin'
+let g:netrw_dirhist_8='/Users/adamdawkins/development/mint-velvet/emailbuilder/source'
