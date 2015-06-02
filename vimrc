@@ -16,7 +16,7 @@ runtime macros/matchit.vim        " Load the matchit plugin.
 let mapleader = ","               " map leader to comma
 
 set showcmd                       " Display incomplete commands.
-
+set guifont=Source\ Code\ Pro:h20
 set showmode                      " Display the mode you're in.
 
 set backspace=indent,eol,start    " Intuitive backspacing.
@@ -26,7 +26,7 @@ set hidden                        " Handle multiple buffers better.
 set wildmenu                      " Enhanced command line completion.
 set wildmode=list:longest         " Complete files like a shell.
 
-set wildignore=*.scssc,*~,*.log,tmp/*,packages/*,*.pyc
+set wildignore=*.scssc,*~,*.log,tmp/*,packages/*,*.pyc,node_modules/**/*,*/vendor/**/*
 
 set ignorecase                    " Case-insensitive searching.
 set smartcase                     " But case-sensitive if expression contains a capital letter.
@@ -129,6 +129,8 @@ inoremap (<cr> (<cr>)<c-o>O
 " spellings
 iab mulitplayer multiplayer
 iab backrgound background
+iab EXECTUE EXECUTE
+iab exectue execute
 iab rbga rgba
 
 
@@ -143,5 +145,5 @@ autocmd FileType python set ts=4
 autocmd FileType python set sts=4
 let &t_Co=256 
 set colorcolumn=80
-set background=light
 colorscheme solarized
+set background=dark
