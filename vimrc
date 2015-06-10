@@ -1,5 +1,9 @@
 " Example Vim configuration.
 " Copy or symlink to ~/.vimrc or ~/_vimrc.
+if &shell =~# 'fish$'
+      set shell=sh
+    endif
+endif
 
 execute pathogen#infect()
 
