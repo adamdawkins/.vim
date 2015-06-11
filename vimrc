@@ -1,8 +1,5 @@
 " Example Vim configuration.
 " Copy or symlink to ~/.vimrc or ~/_vimrc.
-if &shell =~# 'fish$'
-  set shell=sh
-endif
 
 execute pathogen#infect()
 
@@ -16,7 +13,6 @@ set completefunc=syntaxcomplete#Complete
 
 runtime macros/matchit.vim        " Load the matchit plugin.
 
-let mapleader = ","               " map leader to comma
 
 set showcmd                       " Display incomplete commands.
 set guifont=Source\ Code\ Pro:h20
@@ -57,6 +53,12 @@ set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
 set tabstop=2                    " Global tab width.
 set shiftwidth=2                 " And again, related.
 set expandtab                    " Use spaces instead of tabs
+
+
+
+" Map leader to comma
+
+let mapleader=","
 
 " open current file
 map <leader>o :!open %<cr>
@@ -149,4 +151,4 @@ autocmd FileType python set sts=4
 let &t_Co=256 
 set colorcolumn=80
 colorscheme solarized
-set background=dark
+set background=light
