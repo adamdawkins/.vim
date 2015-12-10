@@ -20,6 +20,8 @@ syn case ignore
 syn region cssString start='"' end='"' contained
 syn region cssString start="'" end="'" contained
 
+set cursorcolumn
+
 " HTML4 tags
 syn keyword cssTagName abbr acronym address applet area base a b
 syn keyword cssTagName basefont bdo big blockquote body button br
