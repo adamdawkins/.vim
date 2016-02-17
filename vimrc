@@ -1,4 +1,3 @@
-" Example Vim configuration.
 " Copy or symlink to ~/.vimrc or ~/_vimrc.
 
 execute pathogen#infect()
@@ -15,7 +14,7 @@ runtime macros/matchit.vim        " Load the matchit plugin.
 
 
 set showcmd                       " Display incomplete commands.
-set guifont=Source\ Code\ Pro:h20
+set guifont=Source\ Code\ Pro:h16
 set showmode                      " Display the mode you're in.
 
 set backspace=indent,eol,start    " Intuitive backspacing.
@@ -25,7 +24,7 @@ set hidden                        " Handle multiple buffers better.
 set wildmenu                      " Enhanced command line completion.
 set wildmode=list:longest         " Complete files like a shell.
 
-set wildignore=*.scssc,*~,*.log,tmp/*,packages/*,*.pyc,node_modules/**/*,*/vendor/**/*
+set wildignore=*.scssc,*~,*.log,tmp/*,packages/*,*.pyc,**/node_modules/**/*,*/vendor/**/*
 
 set ignorecase                    " Case-insensitive searching.
 set smartcase                     " But case-sensitive if expression contains a capital letter.
@@ -79,6 +78,9 @@ map <leader>p :CtrlP<cr>
 map <leader>b :CtrlPBuffer<cr>
 
 map <leader>i :!coffee -c %<cr>
+map <leader>j :JSHint<cr>
+map <leader>l :lopen<cr>
+map <leader>x :lclose<cr>
 
 vmap <leader>a :SCSSA<cr>
 
@@ -141,6 +143,18 @@ iab rbga rgba
 
 " ruby test configuration
 let g:rubytest_in_quickfix = 1
+
+" Syntastic setup
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_w = 1
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Automatic fold settings for specific files. Uncomment to use.
 " autocmd FileType ruby setlocal foldmethod=syntax

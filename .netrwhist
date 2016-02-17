@@ -1,8 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/adamdawkins/development/meteor-espresso/lib'
-let g:netrw_dirhist_2='/Users/adamdawkins/code/meteor/prototyping/minimalist/client'
-let g:netrw_dirhist_3='/Users/adamdawkins/code/meteor/fashion-correct/server/methods'
-let g:netrw_dirhist_4='/Users/adamdawkins/development/myfashioninbox/.deploy/production'
-let g:netrw_dirhist_5='/Users/adamdawkins/.vim/bundle/funcoo.vim'
-let g:netrw_dirhist_6='/Users/adamdawkins/.config/fish/functions'
+let g:netrw_dirhist_cnt =0
