@@ -14,7 +14,7 @@ runtime macros/matchit.vim        " Load the matchit plugin.
 
 
 set showcmd                       " Display incomplete commands.
-set guifont=Source\ Code\ Pro:h16
+set guifont=Source\ Code\ Pro:h24
 set showmode                      " Display the mode you're in.
 
 set backspace=indent,eol,start    " Intuitive backspacing.
@@ -95,8 +95,6 @@ cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('
 cnoreabbrev <expr> Bd ((getcmdtype() is# ':' && getcmdline() is# 'Bd')?('bd'):('Bd'))
 cnoreabbrev <expr> B# ((getcmdtype() is# ':' && getcmdline() is# 'B#')?('bd'):('B#'))
 cnoreabbrev <expr> Wa ((getcmdtype() is# ':' && getcmdline() is# 'Wa')?('wa'):('W'))
-cnoreabbrev <expr> bda ((getcmdtype() is# ':' && getcmdline() is# 'bda')?('1,2000bd'):('bda'))
-cnoreabbrev <expr> bda! ((getcmdtype() is# ':' && getcmdline() is# 'bda!')?('1,2000bd!'):('bda!'))
 
 nmap _ :
 imap  
@@ -128,6 +126,8 @@ cmap   
 " nnoremap <Up>    <NOP>
 " nnoremap <Down>  <NOP>
 
+" Disable entering Ex mode
+nnoremap Q <nop>
 " auto-insert closing brace/bracket on return
 inoremap {<cr> {<cr>}<c-o>O
 inoremap [<cr> [<cr>]<c-o>O
@@ -163,6 +163,6 @@ autocmd FileType python set sw=4
 autocmd FileType python set ts=4
 autocmd FileType python set sts=4
 let &t_Co=256 
-set colorcolumn=80
+set colorcolumn=100
 colorscheme solarized
 set background=light
