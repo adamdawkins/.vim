@@ -1,7 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/adamdawkins/.dotfiles/testing'
-let g:netrw_dirhist_2='/Users/adamdawkins/.dotfiles'
-let g:netrw_dirhist_3='/Users/adamdawkins/dragondrop/dev/tearfund/travel/features'
-let g:netrw_dirhist_4='/Users/adamdawkins/dragondrop/dev/tearfund/travel'
-let g:netrw_dirhist_5='/Users/adamdawkins/dragondrop/dev/tearfund/travel/app/models'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/adamdawkins/dragondrop/code/sandbox/quick-test'
+let g:netrw_dirhist_2='/Users/adamdawkins/dragondrop/code/sandbox'
+let g:netrw_dirhist_3='/Users/adamdawkins/dragondrop/code/graphcool-things/node_modules/react-dom-utils'

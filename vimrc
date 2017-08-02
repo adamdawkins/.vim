@@ -14,7 +14,7 @@ runtime macros/matchit.vim        " Load the matchit plugin.
 
 
 set showcmd                       " Display incomplete commands.
-set guifont=Source\ Code\ Pro:h24
+set guifont=Source\ Code\ Pro:h32
 set showmode                      " Display the mode you're in.
 
 set backspace=indent,eol,start    " Intuitive backspacing.
@@ -51,42 +51,26 @@ set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
 " UNCOMMENT TO USE
 set tabstop=2                    " Global tab width.
 set shiftwidth=2                 " And again, related.
-set expandtab                    " Use spaces instead of tabs
+"set expandtab                    " Use spaces instead of tabs
 
-
-
-" Map leader to comma
-
-let mapleader=","
-
-" open current file
-map <leader>o :!open %<cr>
 
 
 set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-
-
-" leader c: clear search 
-map <leader>c :let @/=''<cr>
-
-map <leader>r :%s/>\zs\ze</\r/g<cr>
-
+let mapleader=","											 " Map leader to comma
+" Leaders
+map <leader>b :CtrlPBuffer<cr>				" open CtrlP Buffer
+map <leader>c :let @/=''<cr> 					" leader c: clear search 
+map <leader>g :GundoToggle<cr>				" Toggle Gundo
+map <leader>l :lopen<cr>							" Open location list
+map <leader>o :!open %<cr> 			  		" open current file
+" open CtrlP
 map <leader>p :CtrlP<cr>
-map <leader>b :CtrlPBuffer<cr>
-
-map <leader>i :!coffee -c %<cr>
-map <leader>j :JSHint<cr>
-map <leader>l :lopen<cr>
-map <leader>x :lclose<cr>
-
-vmap <leader>a :SCSSA<cr>
-
-" leader g = gundo
-
-map <leader>g :GundoToggle<cr>
+map <leader>r :%s/>\zs\ze</\r/g<cr> 	" put a new line between </> and <..>
+map <leader>t :NERDTreeToggle<cr>			" toggle NERDTree
+map <leader>x :lclose<cr>							" close location list
 
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
@@ -96,11 +80,11 @@ cnoreabbrev <expr> Bd ((getcmdtype() is# ':' && getcmdline() is# 'Bd')?('bd'):('
 cnoreabbrev <expr> B# ((getcmdtype() is# ':' && getcmdline() is# 'B#')?('bd'):('B#'))
 cnoreabbrev <expr> Wa ((getcmdtype() is# ':' && getcmdline() is# 'Wa')?('wa'):('W'))
 
-nmap _ :
+" nmap _ :
 imap  
 cmap  
 
-nmap \ :
+nmap <Space> :
 imap   
 cmap   
 
@@ -117,14 +101,14 @@ cmap   
  \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 " disable arrow keys
-" inoremap <Left>  <NOP>
-" inoremap <Right> <NOP>
-" inoremap <Up>    <NOP>
-" inoremap <Down>  <NOP>
-" nnoremap <Left>  <NOP>
-" nnoremap <Right> <NOP>
-" nnoremap <Up>    <NOP>
-" nnoremap <Down>  <NOP>
+inoremap <Left>  <NOP>
+inoremap <Right> <NOP>
+inoremap <Up>    <NOP>
+inoremap <Down>  <NOP>
+nnoremap <Left>  <NOP>
+nnoremap <Right> <NOP>
+nnoremap <Up>    <NOP>
+nnoremap <Down>  <NOP>
 
 " Disable entering Ex mode
 nnoremap Q <nop>
@@ -134,12 +118,9 @@ inoremap [<cr> [<cr>]<c-o>O
 inoremap (<cr> (<cr>)<c-o>O
 
 " spellings
-iab mulitplayer multiplayer
 iab backrgound background
-iab EXECTUE EXECUTE
-iab exectue execute
 iab rbga rgba
-
+iab habtm has_and_belongs_to_many
 
 " ruby test configuration
 let g:rubytest_in_quickfix = 1
@@ -156,6 +137,10 @@ let g:syntastic_check_on_wq = 1
 let g:syntastic_check_on_w = 1
 let g:syntastic_javascript_checkers = ['eslint']
 
+" enable jsx syntax in .js files
+let g:jsx_ext_required = 0
+
+
 " Automatic fold settings for specific files. Uncomment to use.
 " autocmd FileType ruby setlocal foldmethod=syntax
 " autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
@@ -165,4 +150,4 @@ autocmd FileType python set sts=4
 let &t_Co=256 
 set colorcolumn=100
 colorscheme solarized
-set background=light
+set background=dark
