@@ -61,16 +61,42 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*Cap
 
 let mapleader=","											 " Map leader to comma
 " Leaders
-map <leader>b :CtrlPBuffer<cr>				" open CtrlP Buffer
-map <leader>c :let @/=''<cr> 					" leader c: clear search 
-map <leader>g :GundoToggle<cr>				" Toggle Gundo
-map <leader>l :lopen<cr>							" Open location list
-map <leader>o :!open %<cr> 			  		" open current file
+
+" open CtrlP Buffer
+map <leader>b :CtrlPBuffer<cr>
+
+" clear search 
+map <leader>c :let @/=''<cr>
+
+" Toggle Gundo
+map <leader>g :GundoToggle<cr>
+
+" Open location list
+map <leader>l :lopen<cr>
+
+" CtrlPModified shows a list of modifed files since last commit
+map <Leader>m :CtrlPModified<CR>
+
+" CtrlPBranch shows a list of modifed files on your current branch
+map <Leader>M :CtrlPBranch<CR>
+
+" open current file
+map <leader>o :!open %<cr>
+
 " open CtrlP
 map <leader>p :CtrlP<cr>
-map <leader>r :%s/>\zs\ze</\r/g<cr> 	" put a new line between </> and <..>
-map <leader>t :NERDTreeToggle<cr>			" toggle NERDTree
-map <leader>x :lclose<cr>							" close location list
+
+" put a new line between </> and <..>
+map <leader>r :%s/>\zs\ze</\r/g<cr>
+
+" run this file in ruby
+map <leader>R :!ruby %<cr>
+
+" toggle NERDTree
+map <leader>t :NERDTreeToggle<cr>
+
+" close location list
+map <leader>x :lclose<cr>
 
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
