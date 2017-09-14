@@ -14,6 +14,9 @@ syn include @coffeeJS syntax/javascript.vim
 " highlight the column
 set cursorcolumn
 
+" use spaces for tabs
+set expandtab
+
 " Highlight long strings.
 syn sync minlines=100
 
