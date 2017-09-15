@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/Users/adamdawkins/dragondrop/code/sandbox/quick-test'
 let g:netrw_dirhist_2='/Users/adamdawkins/dragondrop/code/sandbox'
 let g:netrw_dirhist_3='/Users/adamdawkins/dragondrop/code/graphcool-things/node_modules/react-dom-utils'
+let g:netrw_dirhist_4='/Users/adamdawkins/.vim'

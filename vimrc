@@ -1,18 +1,65 @@
 " Copy or symlink to ~/.vimrc or ~/_vimrc.
 
-execute pathogen#infect()
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-set nocompatible                  " Must come first because it changes other options.
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-silent! call pathogen#runtime_append_all_bundles()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-syntax enable                     " Turn on syntax highlighting.
+" Keep Plugin commands between vundle#begin/end.
+
+" Vim plugin for the Perl module / CLI script 'ack'
+" :Ack 
+Plugin 'mileszs/ack.vim'
+
+" Ctrl P for file navigation
+Plugin 'kien/ctrlp.vim'
+
+" ,m to see modified files
+Plugin 'jasoncodes/ctrlp-modified.vim'
+
+" a Git wrapper so awesome, it should be illegal
+Plugin 'tpope/vim-fugitive'
+
+" Undo browser
+Plugin 'sjl/gundo.vim'
+
+" solarized Colorsheme
+Plugin 'altercation/vim-colors-solarized'
+
+" quoting/parenthesizing made simple
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+
+Plugin 'mattn/emmet-vim'
+
+" Javascript code-analysis engine
+Plugin 'ternjs/tern_for_vim'
+
+
+" SYNTAX
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-git'
+Plugin 'tpope/vim-rails'
+Plugin 'mxw/vim-jsx'
+Plugin 'jparise/vim-graphql'
+
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
 filetype plugin indent on         " Turn on file type detection.
+syntax enable                     " Turn on syntax highlighting.
+
 set completefunc=syntaxcomplete#Complete
-
 runtime macros/matchit.vim        " Load the matchit plugin.
-
-
 set showcmd                       " Display incomplete commands.
 set guifont=Source\ Code\ Pro:h32
 set showmode                      " Display the mode you're in.
@@ -152,9 +199,9 @@ iab habtm has_and_belongs_to_many
 let g:rubytest_in_quickfix = 1
 
 " Syntastic setup
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
@@ -165,6 +212,13 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 " enable jsx syntax in .js files
 let g:jsx_ext_required = 0
+
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+	echo "@".getcmdline()
+	execute ":'<,'>normal @".nr2char(getchar())
+endfunction
 
 
 " Automatic fold settings for specific files. Uncomment to use.
