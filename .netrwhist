@@ -1,6 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/adamdawkins/dragondrop/code/sandbox/quick-test'
-let g:netrw_dirhist_2='/Users/adamdawkins/dragondrop/code/sandbox'
-let g:netrw_dirhist_3='/Users/adamdawkins/dragondrop/code/graphcool-things/node_modules/react-dom-utils'
-let g:netrw_dirhist_4='/Users/adamdawkins/.vim'
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/adamdawkins/dragondrop/code/sandbox/biifar/imports/ui'
+let g:netrw_dirhist_2='/Users/adamdawkins/dragondrop/code/sandbox/biifar/imports/ui/pages'
+let g:netrw_dirhist_3='/Users/adamdawkins/dragondrop/code/sandbox/biifar/imports/ui/pages/franchise'
+let g:netrw_dirhist_4='/Users/adamdawkins/dragondrop/dev/mint-velvet/customer-engagement/client/modules/engagements'
+let g:netrw_dirhist_5='/Users/adamdawkins/dragondrop/dev/mint-velvet/customer-engagement/client/modules/engagements/components'
+let g:netrw_dirhist_6='/Users/adamdawkins/dragondrop/dev/tearfund/with-tearfund-stories/app/views/deeper/deeper_resources'
+let g:netrw_dirhist_7='/Users/adamdawkins/development/mint-velvet/applications/engage/lib/collections'

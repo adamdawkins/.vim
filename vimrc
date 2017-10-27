@@ -6,8 +6,6 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -27,6 +25,9 @@ Plugin 'jasoncodes/ctrlp-modified.vim'
 " a Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
 
+" Comment related stuff
+Plugin 'tpope/vim-commentary'
+
 " Undo browser
 Plugin 'sjl/gundo.vim'
 
@@ -39,18 +40,13 @@ Plugin 'tpope/vim-unimpaired'
 
 Plugin 'mattn/emmet-vim'
 
-" Javascript code-analysis engine
-Plugin 'ternjs/tern_for_vim'
-
-
 " SYNTAX
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-rails'
 Plugin 'mxw/vim-jsx'
 Plugin 'jparise/vim-graphql'
-
-
+Plugin 'leafgarland/typescript-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -98,7 +94,7 @@ set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
 " UNCOMMENT TO USE
 set tabstop=2                    " Global tab width.
 set shiftwidth=2                 " And again, related.
-"set expandtab                    " Use spaces instead of tabs
+set expandtab                    " Use spaces instead of tabs
 
 
 
@@ -230,4 +226,4 @@ autocmd FileType python set sts=4
 let &t_Co=256 
 set colorcolumn=100
 colorscheme solarized
-set background=dark
+set background=light
