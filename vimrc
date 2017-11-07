@@ -19,9 +19,6 @@ Plugin 'mileszs/ack.vim'
 " Ctrl P for file navigation
 Plugin 'kien/ctrlp.vim'
 
-" ,m to see modified files
-Plugin 'jasoncodes/ctrlp-modified.vim'
-
 " a Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
 
@@ -47,6 +44,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'mxw/vim-jsx'
 Plugin 'jparise/vim-graphql'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'git://github.com/flowtype/vim-flow.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -68,6 +66,9 @@ set wildmenu                      " Enhanced command line completion.
 set wildmode=list:longest         " Complete files like a shell.
 
 set wildignore=*.scssc,*~,*.log,tmp/*,packages/*,*.pyc,**/node_modules/**/*,*/vendor/**/*
+
+" ignore the duplicate directories in Direct Sight project in CtrlP
+let g:ctrlp_custom_ignore =  'application/modules/(member|staff|admin)/*'
 
 set ignorecase                    " Case-insensitive searching.
 set smartcase                     " But case-sensitive if expression contains a capital letter.
@@ -102,8 +103,8 @@ set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-set t_ti= t_te=                   " Prevent Vim from clobbering the scrollback buffer.
-                                  " See http://www.shallowsky.com/linux/noaltscreen.html
+" set t_ti= t_te=                   " Prevent Vim from clobbering the scrollback buffer.
+                                    " See http://www.shallowsky.com/linux/noaltscreen.html
 
 let mapleader=","											 " Map leader to comma
 " Leaders
@@ -119,12 +120,6 @@ map <leader>g :GundoToggle<cr>
 
 " Open location list
 map <leader>l :lopen<cr>
-
-" CtrlPModified shows a list of modifed files since last commit
-map <Leader>m :CtrlPModified<CR>
-
-" CtrlPBranch shows a list of modifed files on your current branch
-map <Leader>M :CtrlPBranch<CR>
 
 " open current file
 map <leader>o :!open %<cr>
@@ -229,4 +224,4 @@ autocmd FileType python set sts=4
 let &t_Co=256 
 set colorcolumn=100
 colorscheme solarized
-set background=dark
+set background=light
