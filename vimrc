@@ -37,7 +37,11 @@ Plugin 'tpope/vim-unimpaired'
 
 Plugin 'mattn/emmet-vim'
 
+" Testing Vimscript
+Plugin 'junegunn/vader.vim'
+
 " SYNTAX
+Plugin 'vim-syntastic/syntastic'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-rails'
@@ -45,6 +49,11 @@ Plugin 'mxw/vim-jsx'
 Plugin 'jparise/vim-graphql'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'git://github.com/flowtype/vim-flow.git'
+Plugin 'git://github.com/eagletmt/ghcmod-vim.git'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'elmcast/elm-vim'
+Plugin 'hail2u/vim-css3-syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -65,7 +74,7 @@ set hidden                        " Handle multiple buffers better.
 set wildmenu                      " Enhanced command line completion.
 set wildmode=list:longest         " Complete files like a shell.
 
-set wildignore=*.scssc,*~,*.log,tmp/*,packages/*,*.pyc,**/node_modules/**/*,*/vendor/**/*
+set wildignore=*.scssc,*~,*.log,tmp/*,packages/*,*.pyc,**/node_modules/**/*,*/vendor/**/*,**/modules/member/views
 
 " ignore the duplicate directories in Direct Sight project in CtrlP
 let g:ctrlp_custom_ignore =  'application/modules/(member|staff|admin)/*'
@@ -95,7 +104,7 @@ set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
 " UNCOMMENT TO USE
 set tabstop=2                    " Global tab width.
 set shiftwidth=2                 " And again, related.
-set expandtab                    " Use spaces instead of tabs
+"set expandtab                    " Use spaces instead of tabs
 
 
 
@@ -104,9 +113,9 @@ set laststatus=2                  " Show the status line all the time
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
 " set t_ti= t_te=                   " Prevent Vim from clobbering the scrollback buffer.
-                                    " See http://www.shallowsky.com/linux/noaltscreen.html
+                                   " See http://www.shallowsky.com/linux/noaltscreen.html
 
-let mapleader=","											 " Map leader to comma
+let mapleader=','											 " Map leader to comma
 " Leaders
 
 " open CtrlP Buffer
@@ -155,18 +164,6 @@ nmap <Space> :
 imap   
 cmap   
 
-" Search for selected text, forwards or backwards.
- vnoremap <silent> * :<C-U>
- \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
- \gvy/<C-R><C-R>=substitute(
- \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
- \gV:call setreg('"', old_reg, old_regtype)<CR>
- vnoremap <silent> # :<C-U>
- \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
- \gvy?<C-R><C-R>=substitute(
-   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
- \gV:call setreg('"', old_reg, old_regtype)<CR>
-
 " disable arrow keys
 inoremap <Left>  <NOP>
 inoremap <Right> <NOP>
@@ -193,24 +190,32 @@ iab habtm has_and_belongs_to_many
 let g:rubytest_in_quickfix = 1
 
 " Syntastic setup
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
-let g:syntastic_check_on_w = 1
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+let g:syntastic_haskell_checkers = ['hlint']
+let g:syntastic_vim_checkers = ['vint']
+let g:syntastic_ignore_files = ['*.min.js$']
+
+" elm vim
+let g:elm_format_autosave = 0
 
 " enable jsx syntax in .js files
 let g:jsx_ext_required = 0
 
+" haskell
+:let g:haddock_browser='/Applications/Google\ Chrome.app'
+
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 function! ExecuteMacroOverVisualRange()
-	echo "@".getcmdline()
+	echo '@'.getcmdline()
 	execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
