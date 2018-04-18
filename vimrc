@@ -48,7 +48,6 @@ Plugin 'tpope/vim-rails'
 Plugin 'mxw/vim-jsx'
 Plugin 'jparise/vim-graphql'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'git://github.com/flowtype/vim-flow.git'
 Plugin 'git://github.com/eagletmt/ghcmod-vim.git'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'Shougo/vimproc.vim'
@@ -127,6 +126,8 @@ map <leader>c :let @/=''<cr>
 " Toggle Gundo
 map <leader>g :GundoToggle<cr>
 
+" replace class= with className=
+map <leader>k :%s/class=/className=/g<cr>
 " Open location list
 map <leader>l :lopen<cr>
 
