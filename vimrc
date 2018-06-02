@@ -1,3 +1,4 @@
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -77,6 +78,9 @@ map <leader>l :SyntasticCheck<cr>
 
 " Toggle NERDTree
 map <leader>n :NERDTreeToggle<cr>
+
+" Open the current file (in whatever it normally opens in)
+map <leader>o :!open %<cr>
 
 " Open CtrlP 
 map <leader>p :CtrlP<cr>
