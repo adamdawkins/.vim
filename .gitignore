@@ -1,1 +1,3 @@
 .netrwhist
+bundle/vim-matchit
+bundle/emmet-vim

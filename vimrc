@@ -39,6 +39,9 @@ Plugin 'adelarsq/vim-matchit'
 " Comments
 Plugin 'tomtom/tcomment_vim'
 
+"Emmet
+Plugin 'mattn/emmet-vim'
+
 " Statusline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
