@@ -33,6 +33,9 @@ Plugin 'tpope/vim-unimpaired'
 " closing pairs
 Plugin 'cohama/lexima.vim'
 
+" Better matching
+Plugin 'adelarsq/vim-matchit'
+
 " Comments
 Plugin 'tomtom/tcomment_vim'
 
