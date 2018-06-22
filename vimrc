@@ -48,6 +48,7 @@ Plugin 'vim-airline/vim-airline-themes'
 
 " COLORSCHEMES
 Plugin 'flazz/vim-colorschemes'
+Plugin 'kadekillary/subtle_solo'
 Plugin 'aradunovic/perun.vim'
 
 
