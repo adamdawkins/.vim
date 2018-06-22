@@ -68,6 +68,9 @@ Plugin 'Valloric/YouCompleteMe'
 " Syntax Checking
 Plugin 'vim-syntastic/syntastic'
 
+" Undo History
+Plugin 'sjl/gundo.vim'
+
 call vundle#end()
 filetype plugin indent on
 
