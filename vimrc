@@ -143,6 +143,5 @@ set guifont=Fira\ Code\ Regular:18
 set number
 
 " COLORS
-let g:airline_theme='dark'
+let g:airline_theme='seagull'
 colorscheme railscasts
-set termguicolors
