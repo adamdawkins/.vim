@@ -57,6 +57,9 @@ Plugin 'tpope/vim-fugitive'
 
 " SYNTAXES
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'jparise/vim-graphql'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 
 " Vim JS Autocompletion with type hints
 Plugin 'marijnh/tern_for_vim'
