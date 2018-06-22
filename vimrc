@@ -129,6 +129,10 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive
 " Allow new buffers to open with unsaved buffers behind
 set hidden
 
+" search settings
+set ignorecase
+set smartcase " searches case insensitive with lower-case letters, but sensitive with uppercase
+
 
 " editor settings
 set shiftwidth=2
