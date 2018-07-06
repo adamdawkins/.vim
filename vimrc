@@ -61,6 +61,9 @@ Plugin 'jparise/vim-graphql'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 
+"Working with words
+Plugin 'tpope/vim-abolish'
+
 " Vim JS Autocompletion with type hints
 Plugin 'marijnh/tern_for_vim'
 Plugin 'Valloric/YouCompleteMe'
