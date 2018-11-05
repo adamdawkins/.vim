@@ -104,6 +104,17 @@ map <leader>o :!open %<cr>
 " Open CtrlP 
 map <leader>p :CtrlP<cr>
 
+" Reload chrome
+map <leader>r :w\|:silent !reload-chrome<cr>
+
+" spell check
+map <leader>s ]s
+
+" <leader>T mapped by Testing (line #204)
+
+" tags
+nmap <leader>t <C-]><cr>
+
 
 " Open ~/.vimrc
 map <leader>v :e ~/.vimrc<cr>
