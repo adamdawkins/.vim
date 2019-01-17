@@ -339,6 +339,23 @@ set tabstop=2
 set guifont=Fira\ Code\ Regular:18
 
 set number
+set winwidth=79
+
+" Prevent Vim from clobbering the scrollback buffer. See
+" http://www.shallowsky.com/linux/noaltscreen.html
+set t_ti= t_te=
+" keep more context when scrolling off the end of a buffer
+set scrolloff=3
+
+" Python indentation
+au BufNewFile,BufRead *.py
+			\:set tabstop=4
+			\:set softtabstop=4
+			\:set shiftwidth=4
+			\:set textwidth=79
+			\:set expandtab
+			\:set autoindent
+			\:set fileformat=unix
 
 " COLORS
 let g:airline_theme='seagull'
