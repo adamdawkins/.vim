@@ -359,4 +359,7 @@ au BufNewFile,BufRead *.py
 
 " COLORS
 let g:airline_theme='seagull'
-colorscheme railscasts
+:set t_Co=256 " 256 colors
+:set cursorline
+:set background=dark
+colorscheme grb256
