@@ -59,6 +59,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'jparise/vim-graphql'
 Plugin 'pangloss/vim-javascript'
+Plugin 'ElmCast/elm-vim'
 Plugin 'mxw/vim-jsx'
 
 "Working with words
