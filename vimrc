@@ -69,8 +69,8 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-abolish'
 
 " Vim JS Autocompletion with type hints
-Plugin 'marijnh/tern_for_vim'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'marijnh/tern_for_vim'
+" Plugin 'Valloric/YouCompleteMe'
 
 " Syntax Checking
 Plugin 'vim-syntastic/syntastic'
