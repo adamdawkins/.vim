@@ -129,6 +129,11 @@ nmap <leader>t <C-]><cr>
 " Open ~/.vimrc
 map <leader>v :e ~/.vimrc<cr>
 
+map <C-l> <C-w><C-l>
+map <C-h> <C-w><C-h>
+map <C-j> <C-w><C-j>
+map <C-k> <C-w><C-k>
+
 " ignore some stuff always
 set wildignore=**/node_modules?**
 
