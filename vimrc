@@ -51,7 +51,6 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'kadekillary/subtle_solo'
 Plugin 'aradunovic/perun.vim'
 
-
 "" GIT
 Plugin 'tpope/vim-fugitive'
 
@@ -61,6 +60,10 @@ Plugin 'jparise/vim-graphql'
 Plugin 'pangloss/vim-javascript'
 Plugin 'ElmCast/elm-vim'
 Plugin 'mxw/vim-jsx'
+Plugin 'tpope/vim-rails'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'plasticboy/vim-markdown'
 
 "Working with words
 Plugin 'tpope/vim-abolish'
