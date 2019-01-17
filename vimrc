@@ -96,6 +96,12 @@ nmap <leader>. :A<cr>
 " ctrl p for current buffers
 map <leader>b :CtrlPBuffer<cr>
 
+" class= -> className=
+map <leader>c :%s/class=/className=/g<cr>
+
+" run deploy command
+map <leader>d :w<cr> \|:!npm run deploy<cr>
+
 " run the Syntastic Check
 map <leader>l :SyntasticCheck<cr>
 
