@@ -135,13 +135,16 @@ map <C-j> <C-w><C-j>
 map <C-k> <C-w><C-k>
 
 " ignore some stuff always
-set wildignore=**/node_modules?**
+set wildignore=**/node_modules?**,**/tmp/**,**/vendor/bundle/**
 
 
 " CTRL-P Setup
 let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_open_multiple_files = 'r'
 let g:ctrlp_match_window = 'top,order:btt,min:1,max:10,results:10'
+
+" let g:rubycomplete_buffer_loading = 1
+" let g:rubycomplete_rails = 1
 
 
 " Syntastic Check setup
@@ -154,6 +157,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
 
 " window and buffery stuff
