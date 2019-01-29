@@ -135,7 +135,7 @@ map <C-j> <C-w><C-j>
 map <C-k> <C-w><C-k>
 
 " ignore some stuff always
-set wildignore=**/node_modules?**,**/tmp/**,**/vendor/bundle/**
+set wildignore=**/node_modules?**,**/tmp/**,**/vendor/bundle/**,**/fixtures/vcr_cassettes/**/*
 
 
 " CTRL-P Setup
