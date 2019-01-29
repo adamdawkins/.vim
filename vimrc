@@ -102,6 +102,9 @@ map <leader>c :%s/class=/className=/g<cr>
 " run deploy command
 map <leader>d :w<cr> \|:!npm run deploy<cr>
 
+" gundo
+map <leader>g :GundoToggle<CR>
+
 " run the Syntastic Check
 map <leader>l :SyntasticCheck<cr>
 
@@ -145,6 +148,10 @@ let g:ctrlp_match_window = 'top,order:btt,min:1,max:10,results:10'
 
 " let g:rubycomplete_buffer_loading = 1
 " let g:rubycomplete_rails = 1
+
+" Gundo Python setup
+let g:gundo_prefer_python3 = 1
+
 
 
 " Syntastic Check setup
