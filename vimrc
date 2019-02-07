@@ -91,6 +91,9 @@ let mapleader=',' " map leader to comma
 " map spacebar to :
 nmap <Space> :
 
+" map leader 3 to b#, buffer switch
+nmap <leader>3 :b#<cr>
+
 " map ,. to switch between test/production
 nmap <leader>. :A<cr>
 
