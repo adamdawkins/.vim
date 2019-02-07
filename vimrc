@@ -45,8 +45,7 @@ Plugin 'vim-airline/vim-airline-themes'
 " COLORSCHEMES
 Plugin 'kadekillary/subtle_solo'
 Plugin 'vim-scripts/Ambient-Color-Scheme'
-Plugin 'aradunovic/perun.vim'
-Plugin 'endel/vim-github-colorscheme'
+" Plugin 'endel/vim-github-colorscheme'
 
 "" GIT
 Plugin 'tpope/vim-fugitive'
@@ -55,11 +54,11 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'jparise/vim-graphql'
 Plugin 'pangloss/vim-javascript'
-Plugin 'ElmCast/elm-vim'
+" Plugin 'ElmCast/elm-vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'tpope/vim-rails'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'vim-scripts/indentpython.vim'
+" Plugin 'davidhalter/jedi-vim'
+" Plugin 'vim-scripts/indentpython.vim'
 Plugin 'plasticboy/vim-markdown'
 
 "Working with words
