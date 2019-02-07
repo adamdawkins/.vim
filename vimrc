@@ -133,6 +133,9 @@ nmap <leader>t <C-]><cr>
 " Open ~/.vimrc
 map <leader>v :e ~/.vimrc<cr>
 
+
+command Noswaps execute "!rm %:h/.%:t.sw*"
+
 map <C-l> <C-w><C-l>
 map <C-h> <C-w><C-h>
 map <C-j> <C-w><C-j>
