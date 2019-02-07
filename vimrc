@@ -47,9 +47,10 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 " COLORSCHEMES
-Plugin 'flazz/vim-colorschemes'
 Plugin 'kadekillary/subtle_solo'
+Plugin 'vim-scripts/Ambient-Color-Scheme'
 Plugin 'aradunovic/perun.vim'
+Plugin 'endel/vim-github-colorscheme'
 
 "" GIT
 Plugin 'tpope/vim-fugitive'
@@ -368,5 +369,6 @@ au BufNewFile,BufRead *.py
 let g:airline_theme='seagull'
 :set t_Co=256 " 256 colors
 :set cursorline
+:set cursorcolumn
 :set background=dark
-colorscheme grb256
+colorscheme ambient
