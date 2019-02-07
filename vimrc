@@ -13,10 +13,6 @@ Plugin 'VundleVim/Vundle.vim'
 " Vim defaults everyone can agree on
 Plugin 'tpope/vim-sensible'
 
-" NAVIGATION
-" NerdTree file explorer
-Plugin 'scrooloose/nerdtree'
-
 " Ctrl P
 Plugin 'kien/ctrlp.vim'
 
@@ -112,8 +108,6 @@ map <leader>g :GundoToggle<CR>
 " run the Syntastic Check
 map <leader>l :SyntasticCheck<cr>
 
-" Toggle NERDTree
-map <leader>n :NERDTreeToggle<cr>
 
 " Open the current file (in whatever it normally opens in)
 map <leader>o :!open %<cr>
