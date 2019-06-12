@@ -51,6 +51,9 @@ Plugin 'vim-scripts/Ambient-Color-Scheme'
 Plugin 'tpope/vim-fugitive'
 
 " SYNTAXES
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'Shougo/vimproc.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'jparise/vim-graphql'
 Plugin 'pangloss/vim-javascript'
@@ -59,20 +62,22 @@ Plugin 'mxw/vim-jsx'
 Plugin 'tpope/vim-rails'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'vim-scripts/indentpython.vim'
+Plugin 'lukerandall/haskellmode-vim'
 Plugin 'plasticboy/vim-markdown'
+Plugin '2072/PHP-Indenting-for-VIm'
 
 "Working with words
 Plugin 'tpope/vim-abolish'
 
 " Vim JS Autocompletion with type hints
-" Plugin 'marijnh/tern_for_vim'
+" Plugin 'marijnh/tern_for_vim'"
 " Plugin 'Valloric/YouCompleteMe'
 
 " Syntax Checking
 Plugin 'vim-syntastic/syntastic'
 
-" Undo History
-Plugin 'sjl/gundo.vim'
+" " Undo History
+" Plugin 'sjl/gundo.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -95,14 +100,18 @@ nmap <leader>. :A<cr>
 " ctrl p for current buffers
 map <leader>b :CtrlPBuffer<cr>
 
+map <leader>B :wa\|execute ':silent !npm run build' \| execute ':redraw!' \| :silent !reload-chrome<cr>
+
 " class= -> className=
 map <leader>c :%s/class=/className=/g<cr>
 
-" run deploy command
-map <leader>d :w<cr> \|:!npm run deploy<cr>
+" " gundo
+" map <leader>g :GundoToggle<CR>
+" temporarily map leader g to :!gulp for Direct Sight no-commit
+map <leader>g :wa\|execute ':silent !gulp' \| execute ':redraw!' \| :silent !reload-chrome<cr>
 
-" gundo
-map <leader>g :GundoToggle<CR>
+map <leader>j :wa\|execute ':silent !npm run webpack --mode production' \| execute ':redraw!' \| :silent !reload-chrome<cr>
+
 
 " run the Syntastic Check
 map <leader>l :SyntasticCheck<cr>
@@ -152,6 +161,8 @@ let g:ctrlp_match_window = 'top,order:btt,min:1,max:10,results:10'
 " Gundo Python setup
 let g:gundo_prefer_python3 = 1
 
+
+let g:haddock_browser="/usr/bin/firefox"
 
 
 " Syntastic Check setup
@@ -318,6 +329,11 @@ augroup vimrcEx
   autocmd! FileType slim set sw=2 sts=2 et
 augroup END
 
+if !exists("g:ycm_semantic_triggers")
+ let g:ycm_semantic_triggers = {}
+ endif
+ let g:ycm_semantic_triggers['typescript'] = ['.']
+
 
 map <leader>gr :topleft :split config/routes.rb<cr>
 function! ShowRoutes()
@@ -364,8 +380,6 @@ au BufNewFile,BufRead *.py
 			\:set autoindent
 			\:set fileformat=unix
 
-" Track the engine.
-Plugin 'SirVer/ultisnips'
 
 " Haskell soft tabs
 autocmd Filetype hs setlocal ts=2 sw=2 expandtab
@@ -374,18 +388,13 @@ autocmd Filetype cabal setlocal ts=2 sw=2 expandtab
 " Turn off folds in Markdown files
 au FileType markdown setlocal nofoldenable
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 " COLORS
 let g:airline_theme='seagull'
 :set t_Co=256 " 256 colors
 :set cursorline
+" :set colorcolumn=80
 :set cursorcolumn
 :set background=dark
 colorscheme ambient
