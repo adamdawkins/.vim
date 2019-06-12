@@ -367,8 +367,12 @@ au BufNewFile,BufRead *.py
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+" Haskell soft tabs
+autocmd Filetype hs setlocal ts=2 sw=2 expandtab
+autocmd Filetype cabal setlocal ts=2 sw=2 expandtab
+
+" Turn off folds in Markdown files
+au FileType markdown setlocal nofoldenable
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
