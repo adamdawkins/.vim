@@ -26,6 +26,9 @@ Plugin 'tpope/vim-surround'
 " useful pairs of mappings
 Plugin 'tpope/vim-unimpaired'
 
+" use CTRL-A/CTRL-X to increment dates, times, and more
+Plugin 'tpope/vim-speeddating'
+
 " closing pairs
 " Plugin 'cohama/lexima.vim'
 
@@ -65,6 +68,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'lukerandall/haskellmode-vim'
 Plugin 'plasticboy/vim-markdown'
 Plugin '2072/PHP-Indenting-for-VIm'
+Plugin 'tpope/vim-endwise' " better `end` inserts for ruby etc
 
 "Working with words
 Plugin 'tpope/vim-abolish'
