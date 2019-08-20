@@ -117,9 +117,6 @@ map <leader>b :CtrlPBuffer<cr>
 
 map <leader>B :wa\|execute ':silent !npm run build' \| execute ':redraw!' \| :silent !reload-chrome<cr>
 
-" class= -> className=
-map <leader>c :%s/class=/className=/g<cr>
-
 " gundo
 map <leader>g :GundoToggle<CR>
 " " temporarily map leader g to :!gulp for Direct Sight
