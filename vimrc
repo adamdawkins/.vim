@@ -81,6 +81,10 @@ Plugin 'tpope/vim-abolish'
 " Syntax Checking
 Plugin 'vim-syntastic/syntastic'
 
+" tmux intergartion
+Plugin 'christoomey/vim-tmux-runner'
+
+
 " " Undo History
 " Plugin 'sjl/gundo.vim'
 
@@ -92,6 +96,12 @@ filetype plugin indent on
 
 " Key mappings
 let mapleader=',' " map leader to comma
+let maplocalleader='\' 
+
+" Vtr config
+let g:VtrStripLeadingWhitespace = 0
+let g:VtrClearEmptyLines = 0
+let g:VtrAppendNewline = 1
 
 " map spacebar to :
 nmap <Space> :
@@ -191,6 +201,9 @@ set hidden
 " search settings
 set ignorecase
 set smartcase " searches case insensitive with lower-case letters, but sensitive with uppercase
+
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
 
 
 """ TESTING (from https://github.com/garybernhardt/dotfiles/blob/master/.vimrc)
