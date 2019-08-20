@@ -387,7 +387,7 @@ set tabstop=2
 set guifont=Fira\ Code\ Regular:18
 
 set number
-set winwidth=79
+" set winwidth=79
 
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
