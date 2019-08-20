@@ -176,6 +176,10 @@ let g:gundo_prefer_python3 = 1
 
 let g:haddock_browser="/usr/bin/firefox"
 
+" Ruby setup
+let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_rails = 1
+
 
 " Syntastic Check setup
 set statusline+=%#warningmsg#
