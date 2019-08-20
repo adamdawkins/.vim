@@ -54,6 +54,7 @@ Plugin 'vim-scripts/Ambient-Color-Scheme'
 Plugin 'tpope/vim-fugitive'
 
 " SYNTAXES
+Plugin 'elixir-editors/vim-elixir'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'Shougo/vimproc.vim'
