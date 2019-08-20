@@ -86,7 +86,7 @@ Plugin 'christoomey/vim-tmux-runner'
 
 
 " " Undo History
-" Plugin 'sjl/gundo.vim'
+Plugin 'sjl/gundo.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -120,10 +120,10 @@ map <leader>B :wa\|execute ':silent !npm run build' \| execute ':redraw!' \| :si
 " class= -> className=
 map <leader>c :%s/class=/className=/g<cr>
 
-" " gundo
-" map <leader>g :GundoToggle<CR>
-" temporarily map leader g to :!gulp for Direct Sight no-commit
-map <leader>g :wa\|execute ':silent !gulp' \| execute ':redraw!' \| :silent !reload-chrome<cr>
+" gundo
+map <leader>g :GundoToggle<CR>
+" " temporarily map leader g to :!gulp for Direct Sight
+" map <leader>g :wa\|execute ':silent !gulp' \| execute ':redraw!' \| :silent !reload-chrome<cr>
 
 map <leader>j :wa\|execute ':silent !npm run webpack --mode production' \| execute ':redraw!' \| :silent !reload-chrome<cr>
 
