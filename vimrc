@@ -282,15 +282,15 @@ function! RunTests(filename)
 	end
 	" The file is executable; assume we should run
 	if executable(a:filename)
-		exec ":!./" . a:filename
+		exec ":call Fifo('./')" . a:filename
 		" Project-specific test script
 	elseif filereadable("bin/test")
-		exec ":!bin/test " . a:filename
+		exec ":call Fifo('bin/test " . a:filename . "')"
 		" Rspec binstub
 	elseif filereadable("bin/rspec")
-		exec ":!bin/rspec " . a:filename
+		exec ":call Fifo('bin/rspec " . a:filename . "')"
 	elseif filereadable("script/cucumber")
-		exec ":!script/cucumber " . a:filename
+		exec ":call Fifo('script/cucumber " . a:filename . "')"
 		" Fall back to the .test-commands pipe if available, assuming someone
 		" is reading the other side and running the commands
 	elseif filewritable(".test-commands")
@@ -303,11 +303,11 @@ function! RunTests(filename)
 		redraw!
 		" Fall back to a blocking test run with Bundler
 	elseif filereadable("bin/rspec")
-		exec ":!bin/rspec --color " . a:filename
+		exec ":call Fifo('bin/rspec --color " . a:filename . "')"
 	elseif filereadable("Gemfile") && strlen(glob("spec/**/*.rb"))
-		exec ":!bundle exec rspec --color " . a:filename
+		exec ":call Fifo('bundle exec rspec --color " . a:filename . "')"
 	elseif filereadable("Gemfile") && strlen(glob("test/**/*.rb"))
-		exec ":!bin/rails test " . a:filename
+		exec ":call Fifo('bin/rails test " . a:filename . "')"
 	end
 endfunction
 
@@ -373,6 +373,11 @@ function! ShowRoutes()
   :normal dd
 endfunction
 map <leader>gR :call ShowRoutes()<cr>
+
+function! Fifo(cmd)
+	:silent! exe '!echo "clear; cd ' . getcwd() . ' && ' . a:cmd . '" > /tmp/cmds'
+	:redraw!
+endfunction
 
 
 " editor settings
