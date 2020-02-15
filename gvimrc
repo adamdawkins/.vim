@@ -9,4 +9,4 @@ set background=light              " Background.
 set lines=50 columns=100          " Window dimensions.
 
 set guioptions-=r                 " Don't show right scrollbar
-et guicursor+=n:hor10-Cursor/lCursor-blinkon0
+set guicursor+=n:hor10-Cursor/lCursor-blinkon0

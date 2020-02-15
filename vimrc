@@ -20,6 +20,9 @@ Plugin 'kien/ctrlp.vim'
 " Vim motions on speed!
 Plugin 'easymotion/vim-easymotion'
 
+" A scratch file
+Plugin 'vim-scripts/scratch.vim'
+
 " Surround
 Plugin 'tpope/vim-surround'
 
@@ -28,9 +31,6 @@ Plugin 'tpope/vim-unimpaired'
 
 " use CTRL-A/CTRL-X to increment dates, times, and more
 Plugin 'tpope/vim-speeddating'
-
-" closing pairs
-" Plugin 'cohama/lexima.vim'
 
 " Better matching
 Plugin 'adelarsq/vim-matchit'
@@ -41,45 +41,59 @@ Plugin 'tomtom/tcomment_vim'
 "Emmet
 Plugin 'mattn/emmet-vim'
 
-" Statusline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 
-" COLORSCHEMES
-Plugin 'kadekillary/subtle_solo'
-Plugin 'vim-scripts/Ambient-Color-Scheme'
-" Plugin 'endel/vim-github-colorscheme'
-
-"" GIT
+" GIT
 Plugin 'tpope/vim-fugitive'
 
 " SYNTAXES
-Plugin 'elixir-editors/vim-elixir'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/tsuquyomi'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'jparise/vim-graphql'
-Plugin 'pangloss/vim-javascript'
+
+"       CoffeeScript
+" Plugin 'kchmck/vim-coffee-script'
+
+"      elixir
+" Plugin 'elixir-editors/vim-elixir'
+
+"      elm
 " Plugin 'ElmCast/elm-vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'tpope/vim-rails'
-" Plugin 'davidhalter/jedi-vim'
-" Plugin 'vim-scripts/indentpython.vim'
+
+"      Erlang
+" Plugin 'vim-erlang/vim-erlang-omnicomplete'
+
+"      GraphQL
+" Plugin 'jparise/vim-graphql'
+"      Handlebars
+Plugin 'mustache/vim-mustache-handlebars'
+"      Haskell
+Plugin 'alx741/vim-stylishask'
 Plugin 'lukerandall/haskellmode-vim'
+
+"      Javascript
+Plugin 'maxmellon/vim-jsx-pretty'
+Plugin 'pangloss/vim-javascript'
+
+"      Markdown
 Plugin 'plasticboy/vim-markdown'
+
+"      PHP
 Plugin '2072/PHP-Indenting-for-VIm'
+Plugin 'lumiliet/vim-twig'
+
+"      Python
+" Plugin 'vim-scripts/indentpython.vim'
+
+"       TypeScript
+" Plugin 'leafgarland/typescript-vim'
+
+""     TOOLS
+Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-endwise' " better `end` inserts for ruby etc
+Plugin 'tpope/vim-abolish' " Working with words
+Plugin 'roman/golden-ratio' " resize current window
+" Plugin 'ternjs/tern_for_vim' " JS autocomplete
 
-"Working with words
-Plugin 'tpope/vim-abolish'
-
-" Vim JS Autocompletion with type hints
-" Plugin 'marijnh/tern_for_vim'"
-" Plugin 'Valloric/YouCompleteMe'
 
 " Syntax Checking
-Plugin 'vim-syntastic/syntastic'
+Plugin 'dense-analysis/ale'
 
 " tmux intergartion
 Plugin 'christoomey/vim-tmux-runner'
@@ -96,7 +110,7 @@ filetype plugin indent on
 
 " Key mappings
 let mapleader=',' " map leader to comma
-let maplocalleader='\' 
+let maplocalleader='\'
 
 " Vtr config
 let g:VtrStripLeadingWhitespace = 0
@@ -117,23 +131,33 @@ map <leader>b :CtrlPBuffer<cr>
 
 map <leader>B :wa\|execute ':silent !npm run build' \| execute ':redraw!' \| :silent !reload-chrome<cr>
 
+nnoremap <leader>e :call SelectaFile(expand('%:h'), "*", ":edit")<cr>
+
 " gundo
-map <leader>g :GundoToggle<CR>
-" " temporarily map leader g to :!gulp for Direct Sight
-" map <leader>g :wa\|execute ':silent !gulp' \| execute ':redraw!' \| :silent !reload-chrome<cr>
+map <leader>gu :GundoToggle<CR>
+
+nnoremap <leader>gv :call SelectaFile("app/views", "*", ":edit")<cr>
+nnoremap <leader>gc :call SelectaFile("app/controllers", "*", ":edit")<cr>
+nnoremap <leader>gm :call SelectaFile("app/models", "*", ":edit")<cr>
+nnoremap <leader>gh :call SelectaFile("app/helpers", "*", ":edit")<cr>
+nnoremap <leader>gl :call SelectaFile("lib", "*", ":edit")<cr>
+nnoremap <leader>gp :call SelectaFile("public", "*", ":edit")<cr>
+nnoremap <leader>gs :call SelectaFile("app/assets/stylesheets", "*.sass", ":edit")<cr>
+nnoremap <leader>gt :call SelectaFile("app/spec", "*", ":edit")<cr>
 
 map <leader>j :wa\|execute ':silent !npm run webpack --mode production' \| execute ':redraw!' \| :silent !reload-chrome<cr>
 
+:map <leader>l :PromoteToLet<cr>
 
-" run the Syntastic Check
-map <leader>l :SyntasticCheck<cr>
-
+map <leader>m :call MkDir()<cr>
 
 " Open the current file (in whatever it normally opens in)
 map <leader>o :!open %<cr>
 
-" Open CtrlP 
-map <leader>p :CtrlP<cr>
+" Open CtrlP
+" map <leader>p :CtrlP<cr>
+" force selecta instead of CtrlP for a bit
+nnoremap <leader>p :call SelectaFile(".", "*", ":edit")<cr>
 
 " Reload chrome
 map <leader>r :w\|:silent !reload-chrome<cr>
@@ -144,11 +168,12 @@ map <leader>s ]s
 " <leader>T mapped by Testing (line #204)
 
 " tags
-nmap <leader>t <C-]><cr>
+nmap <leader>f <C-]><cr>
 
+nnoremap <leader>v :call SelectaFile(expand('%:h'), "*", ":view")<cr>
 
 " Open ~/.vimrc
-map <leader>v :e ~/.vimrc<cr>
+map <leader>vi :e ~/.vimrc<cr>
 
 
 command Noswaps execute "!rm %:h/.%:t.sw*"
@@ -160,6 +185,29 @@ map <C-k> <C-w><C-k>
 
 " ignore some stuff always
 set wildignore=**/node_modules?**,**/tmp/**,**/vendor/bundle/**,**/fixtures/vcr_cassettes/**/*
+
+
+
+" ALE Syntax checker setup
+"
+let g:ale_javascript_prettier_use_global = 1
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier'],
+\   'ruby': ['standardrb'],
+\}
+
+let g:ale_linters = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': [],
+\   'ruby': ['standardrb', 'rubocop'],
+\   'scss': [],
+\}
+
+let g:ale_fix_on_save = 1
+
+set omnifunc=syntaxcomplete#Complete
 
 
 " CTRL-P Setup
@@ -180,21 +228,6 @@ let g:haddock_browser="/usr/bin/firefox"
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_rails = 1
 
-
-" Syntastic Check setup
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_w = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
-
 " window and buffery stuff
 
 " Allow new buffers to open with unsaved buffers behind
@@ -206,6 +239,12 @@ set smartcase " searches case insensitive with lower-case letters, but sensitive
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
+
+
+" make directory for current file
+function MkDir()
+  exe '!mkdir -p %:h'
+endfunction
 
 
 """ TESTING (from https://github.com/garybernhardt/dotfiles/blob/master/.vimrc)
@@ -253,7 +292,7 @@ function! RunTestFile(...)
 	endif
 
 	" Are we in a test file?
-	let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\|test_.*\.py\|_test.py\)$') != -1
+	let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|Test.hs\)$') != -1
 
 	" Run the tests for the previously-marked file (or the current file if
 	" it's a test).
@@ -288,13 +327,13 @@ function! RunTests(filename)
 		exec ":call Fifo('bin/test " . a:filename . "')"
 		" Rspec binstub
 	elseif filereadable("bin/rspec")
-		exec ":call Fifo('bin/rspec " . a:filename . "')"
+		exec ":call Fifo('bundle exec rspec --format documentation --fail-fast " . a:filename . "')"
 	elseif filereadable("script/cucumber")
-		exec ":call Fifo('script/cucumber " . a:filename . "')"
+		exec ":call Fifo('bundle exec script/cucumber " . a:filename . "')"
 		" Fall back to the .test-commands pipe if available, assuming someone
 		" is reading the other side and running the commands
 	elseif filewritable(".test-commands")
-		let cmd = 'rspec --color --format progress --require "~/lib/vim_rspec_formatter" --format VimFormatter --out tmp/quickfix'
+		let cmd = 'rspec --color --format documentation --require "~/lib/vim_rspec_formatter" --format VimFormatter --fail-fast --out tmp/quickfix'
 		exec ":!echo " . cmd . " " . a:filename . " > .test-commands"
 
 		" Write an empty string to block until the command completes
@@ -303,12 +342,38 @@ function! RunTests(filename)
 		redraw!
 		" Fall back to a blocking test run with Bundler
 	elseif filereadable("bin/rspec")
-		exec ":call Fifo('bin/rspec --color " . a:filename . "')"
+		exec ":call Fifo('bin/rspec --color --fail-fast " . a:filename . "')"
 	elseif filereadable("Gemfile") && strlen(glob("spec/**/*.rb"))
-		exec ":call Fifo('bundle exec rspec --color " . a:filename . "')"
+		exec ":call Fifo('bundle exec rspec --format documentation --color --fail-fast " . a:filename . "')"
 	elseif filereadable("Gemfile") && strlen(glob("test/**/*.rb"))
 		exec ":call Fifo('bin/rails test " . a:filename . "')"
 	end
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Selecta Mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Run a given vim command on the results of fuzzy selecting from a given
+" shell command. See usage below.
+function! SelectaCommand(choice_command, selecta_args, vim_command)
+  try
+    let selection = system(a:choice_command . " | selecta " .  a:selecta_args)
+    " Escape spaces in the file name. That ensures that it's a
+    " single argument
+    " when concatenated with vim_command and run with exec.
+    let selection = substitute(selection, ' ', '\\ ', "g")
+  catch /Vim:Interrupt/
+    " Swallow the ^C so that the redraw below happens; otherwise there will be
+    " leftovers from selecta on the screen
+    redraw!
+    return
+  endtry
+  redraw!
+  exec a:vim_command . " " .  selection
+endfunction
+
+function! SelectaFile(path, glob, command)
+  call SelectaCommand("find " . a:path . "/* -type f -and -not -path '*/node_modules/*' -and -not -path '*/_build/*' -and -not -path '*/build/*' -and -iname '" . a:glob . "' -and -not -iname '*.pyc' -and -not -ipath '*/tmp/*' -and -not -ipath '*/.meteor/*' -and -not -iname '*.png' -and -not -iname '*.jpg' -and -not -iname '*.eps' -and -not -iname '*.pdf' -and -not -iname '*.svg' -and -not -iname '*.ttf'", "", a:command)
 endfunction
 
 augroup vimrcEx
@@ -349,11 +414,6 @@ augroup vimrcEx
   autocmd! FileType slim set sw=2 sts=2 et
 augroup END
 
-if !exists("g:ycm_semantic_triggers")
- let g:ycm_semantic_triggers = {}
- endif
- let g:ycm_semantic_triggers['typescript'] = ['.']
-
 
 map <leader>gr :topleft :split config/routes.rb<cr>
 function! ShowRoutes()
@@ -375,16 +435,27 @@ endfunction
 map <leader>gR :call ShowRoutes()<cr>
 
 function! Fifo(cmd)
-	:silent! exe '!echo "clear; cd ' . getcwd() . ' && ' . a:cmd . '" > /tmp/cmds'
-	:redraw!
+  :silent! exe '!echo "clear; cd ' . getcwd() . ' && ' . a:cmd . '" > /tmp/cmds'
+  :redraw!
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PROMOTE VARIABLE TO RSPEC LET
+" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+endfunction
+:command! PromoteToLet :call PromoteToLet()
 
 
 " editor settings
 set shiftwidth=2
 set tabstop=2
-
-set guifont=Fira\ Code\ Regular:18
+set expandtab
 
 set number
 " set winwidth=79
@@ -395,15 +466,17 @@ set t_ti= t_te=
 " keep more context when scrolling off the end of a buffer
 set scrolloff=3
 
+set showtabline=2
+
 " Python indentation
 au BufNewFile,BufRead *.py
-			\:set tabstop=4
-			\:set softtabstop=4
-			\:set shiftwidth=4
-			\:set textwidth=79
-			\:set expandtab
-			\:set autoindent
-			\:set fileformat=unix
+      \:set tabstop=4
+      \:set softtabstop=4
+      \:set shiftwidth=4
+      \:set textwidth=79
+      \:set expandtab
+      \:set autoindent
+      \:set fileformat=unix
 
 
 " Haskell soft tabs
@@ -413,13 +486,16 @@ autocmd Filetype cabal setlocal ts=2 sw=2 expandtab
 " Turn off folds in Markdown files
 au FileType markdown setlocal nofoldenable
 
+:set tags=tags
+:set tags^=./.git/tags;
 
+:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 " COLORS
-let g:airline_theme='seagull'
+
 :set t_Co=256 " 256 colors
 :set cursorline
 " :set colorcolumn=80
 :set cursorcolumn
 :set background=dark
-colorscheme ambient
+colorscheme ir_black
