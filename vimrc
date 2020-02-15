@@ -88,7 +88,6 @@ Plugin 'lumiliet/vim-twig'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-endwise' " better `end` inserts for ruby etc
 Plugin 'tpope/vim-abolish' " Working with words
-Plugin 'roman/golden-ratio' " resize current window
 " Plugin 'ternjs/tern_for_vim' " JS autocomplete
 
 
