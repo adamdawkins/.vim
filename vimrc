@@ -62,10 +62,10 @@ Plugin 'tpope/vim-fugitive'
 "      GraphQL
 " Plugin 'jparise/vim-graphql'
 "      Handlebars
-Plugin 'mustache/vim-mustache-handlebars'
+" Plugin 'mustache/vim-mustache-handlebars'
 "      Haskell
-Plugin 'alx741/vim-stylishask'
-Plugin 'lukerandall/haskellmode-vim'
+" Plugin 'alx741/vim-stylishask'
+" Plugin 'lukerandall/haskellmode-vim'
 
 "      Javascript
 Plugin 'maxmellon/vim-jsx-pretty'
@@ -75,18 +75,24 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
 
 "      PHP
-Plugin '2072/PHP-Indenting-for-VIm'
-Plugin 'lumiliet/vim-twig'
+" Plugin '2072/PHP-Indenting-for-VIm'
+" Plugin 'lumiliet/vim-twig'
 
 "      Python
 " Plugin 'vim-scripts/indentpython.vim'
 
+"      Ruby
+Plugin 'joker1007/vim-ruby-heredoc-syntax'
+
 "       TypeScript
 " Plugin 'leafgarland/typescript-vim'
 
+
 ""     TOOLS
+Plugin 'AndrewRadev/splitjoin.vim' " Switch between single-line and multiline forms of code
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-endwise' " better `end` inserts for ruby etc
+" Plugin 'ycm-core/YouCompleteMe' " A code-completion engine for Vim
 Plugin 'tpope/vim-abolish' " Working with words
 " Plugin 'ternjs/tern_for_vim' " JS autocomplete
 
@@ -94,12 +100,14 @@ Plugin 'tpope/vim-abolish' " Working with words
 " Syntax Checking
 Plugin 'dense-analysis/ale'
 
-" tmux intergartion
+" tmux intexgration
 Plugin 'christoomey/vim-tmux-runner'
 
 
 " " Undo History
 Plugin 'sjl/gundo.vim'
+
+Plugin 'jpo/vim-railscasts-theme'
 
 call vundle#end()
 filetype plugin indent on
@@ -185,10 +193,8 @@ map <C-k> <C-w><C-k>
 " ignore some stuff always
 set wildignore=**/node_modules?**,**/tmp/**,**/vendor/bundle/**,**/fixtures/vcr_cassettes/**/*
 
-
-
 " ALE Syntax checker setup
-"
+" "
 let g:ale_javascript_prettier_use_global = 1
 
 let g:ale_fixers = {
@@ -237,7 +243,8 @@ set ignorecase
 set smartcase " searches case insensitive with lower-case letters, but sensitive with uppercase
 
 " automatically rebalance windows on vim resize
-autocmd VimResized * :wincmd =
+" autocmd VimResized * :wincmd =
+" set winwidth=100
 
 
 " make directory for current file
@@ -332,7 +339,7 @@ function! RunTests(filename)
 		" Fall back to the .test-commands pipe if available, assuming someone
 		" is reading the other side and running the commands
 	elseif filewritable(".test-commands")
-		let cmd = 'rspec --color --format documentation --require "~/lib/vim_rspec_formatter" --format VimFormatter --fail-fast --out tmp/quickfix'
+		let cmd = 'bundle exec rspec --color --format documentation --require "~/lib/vim_rspec_formatter" --format VimFormatter --fail-fast --out tmp/quickfix'
 		exec ":!echo " . cmd . " " . a:filename . " > .test-commands"
 
 		" Write an empty string to block until the command completes
@@ -378,7 +385,7 @@ endfunction
 augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
-  autocmd FileType text setlocal textwidth=78
+  " autocmd FileType text setlocal textwidth=78
   " Jump to last cursor position unless it's invalid or in an event handler
   autocmd BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -477,6 +484,8 @@ au BufNewFile,BufRead *.py
       \:set autoindent
       \:set fileformat=unix
 
+" close fugitive buffers
+autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " Haskell soft tabs
 autocmd Filetype hs setlocal ts=2 sw=2 expandtab
@@ -485,16 +494,19 @@ autocmd Filetype cabal setlocal ts=2 sw=2 expandtab
 " Turn off folds in Markdown files
 au FileType markdown setlocal nofoldenable
 
+au BufRead,BufNewFile *.pcss set filetype=css
+
 :set tags=tags
 :set tags^=./.git/tags;
 
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+:set diffopt=vertical
 
 " COLORS
 
 :set t_Co=256 " 256 colors
 :set cursorline
-" :set colorcolumn=80
+:set colorcolumn=100
 :set cursorcolumn
 :set background=dark
-colorscheme ir_black
+colorscheme railscasts
