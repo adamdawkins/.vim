@@ -1,4 +1,7 @@
 
+
+
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -70,6 +73,7 @@ Plugin 'tpope/vim-fugitive'
 "      Javascript
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'pangloss/vim-javascript'
+Plugin 'prettier/vim-prettier'
 
 "      Markdown
 Plugin 'plasticboy/vim-markdown'
@@ -83,6 +87,9 @@ Plugin 'plasticboy/vim-markdown'
 
 "      Ruby
 Plugin 'joker1007/vim-ruby-heredoc-syntax'
+
+"      SQL
+Plugin 'vim-scripts/SQLUtilities'
 
 "       TypeScript
 " Plugin 'leafgarland/typescript-vim'
@@ -137,6 +144,9 @@ nmap <leader>. :A<cr>
 map <leader>b :CtrlPBuffer<cr>
 
 map <leader>B :wa\|execute ':silent !npm run build' \| execute ':redraw!' \| :silent !reload-chrome<cr>
+
+" react class => className
+map <leader>c :%s/class=/className=/g<cr>
 
 nnoremap <leader>e :call SelectaFile(expand('%:h'), "*", ":edit")<cr>
 
@@ -205,12 +215,16 @@ let g:ale_fixers = {
 
 let g:ale_linters = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': [],
-\   'ruby': ['standardrb', 'rubocop'],
+\   'javascript': ['prettier'],
+\   'ruby': ['rubocop'],
 \   'scss': [],
+\   'css': [],
 \}
 
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
+
+let g:prettier#autoformat = 0
+let g:prettier#autoformat_require_pragma = 0
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -243,8 +257,8 @@ set ignorecase
 set smartcase " searches case insensitive with lower-case letters, but sensitive with uppercase
 
 " automatically rebalance windows on vim resize
-" autocmd VimResized * :wincmd =
-" set winwidth=100
+autocmd VimResized * :wincmd =
+set winwidth=120
 
 
 " make directory for current file
@@ -496,6 +510,9 @@ au FileType markdown setlocal nofoldenable
 
 au BufRead,BufNewFile *.pcss set filetype=css
 
+
+:iabbrev constructor constructor(props) {<cr>super(props);<cr><cr>}<UP>
+
 :set tags=tags
 :set tags^=./.git/tags;
 
@@ -506,7 +523,7 @@ au BufRead,BufNewFile *.pcss set filetype=css
 
 :set t_Co=256 " 256 colors
 :set cursorline
-:set colorcolumn=100
+:set colorcolumn=120
 :set cursorcolumn
 :set background=dark
 colorscheme railscasts
