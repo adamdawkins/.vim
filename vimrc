@@ -23,6 +23,9 @@ Plugin 'kien/ctrlp.vim'
 " Vim motions on speed!
 Plugin 'easymotion/vim-easymotion'
 
+" Table Mode
+Plugin 'dhruvasagar/vim-table-mode'
+
 " A scratch file
 Plugin 'vim-scripts/scratch.vim'
 
@@ -34,6 +37,9 @@ Plugin 'tpope/vim-unimpaired'
 
 " use CTRL-A/CTRL-X to increment dates, times, and more
 Plugin 'tpope/vim-speeddating'
+
+" dadbod.vim: Modern database interface for Vim
+Plugin 'tpope/vim-dadbod'
 
 " Better matching
 Plugin 'adelarsq/vim-matchit'
@@ -76,7 +82,11 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'prettier/vim-prettier'
 
 "      Markdown
+Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+
+" Nunjucks
+Plugin 'niftylettuce/vim-jinja'
 
 "      PHP
 " Plugin '2072/PHP-Indenting-for-VIm'
@@ -114,7 +124,9 @@ Plugin 'christoomey/vim-tmux-runner'
 " " Undo History
 Plugin 'sjl/gundo.vim'
 
+" Colorscheme
 Plugin 'jpo/vim-railscasts-theme'
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()
 filetype plugin indent on
@@ -153,14 +165,14 @@ nnoremap <leader>e :call SelectaFile(expand('%:h'), "*", ":edit")<cr>
 " gundo
 map <leader>gu :GundoToggle<CR>
 
-nnoremap <leader>gv :call SelectaFile("app/views", "*", ":edit")<cr>
-nnoremap <leader>gc :call SelectaFile("app/controllers", "*", ":edit")<cr>
-nnoremap <leader>gm :call SelectaFile("app/models", "*", ":edit")<cr>
-nnoremap <leader>gh :call SelectaFile("app/helpers", "*", ":edit")<cr>
-nnoremap <leader>gl :call SelectaFile("lib", "*", ":edit")<cr>
-nnoremap <leader>gp :call SelectaFile("public", "*", ":edit")<cr>
-nnoremap <leader>gs :call SelectaFile("app/assets/stylesheets", "*.sass", ":edit")<cr>
-nnoremap <leader>gt :call SelectaFile("app/spec", "*", ":edit")<cr>
+" nnoremap <leader>gv :call SelectaFile("app/views", "*", ":edit")<cr>
+" nnoremap <leader>gc :call SelectaFile("app/controllers", "*", ":edit")<cr>
+" nnoremap <leader>gm :call SelectaFile("app/models", "*", ":edit")<cr>
+" nnoremap <leader>gh :call SelectaFile("app/helpers", "*", ":edit")<cr>
+" nnoremap <leader>gl :call SelectaFile("lib", "*", ":edit")<cr>
+" nnoremap <leader>gp :call SelectaFile("public", "*", ":edit")<cr>
+" nnoremap <leader>gs :call SelectaFile("app/assets/stylesheets", "*.sass", ":edit")<cr>
+" nnoremap <leader>gt :call SelectaFile("app/spec", "*", ":edit")<cr>
 
 map <leader>j :wa\|execute ':silent !npm run webpack --mode production' \| execute ':redraw!' \| :silent !reload-chrome<cr>
 
@@ -172,17 +184,18 @@ map <leader>m :call MkDir()<cr>
 map <leader>o :!open %<cr>
 
 " Open CtrlP
-" map <leader>p :CtrlP<cr>
+map <leader>p :CtrlP<cr>
 " force selecta instead of CtrlP for a bit
-nnoremap <leader>p :call SelectaFile(".", "*", ":edit")<cr>
+" nnoremap <leader>p :call SelectaFile(".", "*", ":edit")<cr>
 
 " Reload chrome
-map <leader>r :w\|:silent !reload-chrome<cr>
+" map <leader>r :w\|:silent !reload-chrome<cr>
 
 " spell check
 map <leader>s ]s
 
 " <leader>T mapped by Testing (line #204)
+
 
 " tags
 nmap <leader>f <C-]><cr>
@@ -201,7 +214,7 @@ map <C-j> <C-w><C-j>
 map <C-k> <C-w><C-k>
 
 " ignore some stuff always
-set wildignore=**/node_modules?**,**/tmp/**,**/vendor/bundle/**,**/fixtures/vcr_cassettes/**/*
+set wildignore=**/node_modules?**,**/tmp/**,**/vendor/bundle/**,**/fixtures/vcr_cassettes/**/*,**/coverage/**,**/build/**,**/public/packs/**
 
 " ALE Syntax checker setup
 " "
@@ -209,19 +222,18 @@ let g:ale_javascript_prettier_use_global = 1
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier'],
 \   'ruby': ['standardrb'],
 \}
 
 let g:ale_linters = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier'],
-\   'ruby': ['rubocop'],
+\   'ruby': ['standardrb'],
 \   'scss': [],
 \   'css': [],
 \}
 
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = 1
 
 let g:prettier#autoformat = 0
 let g:prettier#autoformat_require_pragma = 0
@@ -235,7 +247,8 @@ let g:ctrlp_open_multiple_files = 'r'
 let g:ctrlp_match_window = 'top,order:btt,min:1,max:10,results:10'
 
 " let g:rubycomplete_buffer_loading = 1
-" let g:rubycomplete_rails = 1
+let g:rubycomplete_rails = 1
+let g:ruby_indent_assignment_style = 'variable'
 
 " Gundo Python setup
 let g:gundo_prefer_python3 = 1
@@ -366,7 +379,7 @@ function! RunTests(filename)
 	elseif filereadable("Gemfile") && strlen(glob("spec/**/*.rb"))
 		exec ":call Fifo('bundle exec rspec --format documentation --color --fail-fast " . a:filename . "')"
 	elseif filereadable("Gemfile") && strlen(glob("test/**/*.rb"))
-		exec ":call Fifo('bin/rails test " . a:filename . "')"
+		exec ":call Fifo('ruby " . a:filename . "')"
 	end
 endfunction
 
@@ -498,6 +511,8 @@ au BufNewFile,BufRead *.py
       \:set autoindent
       \:set fileformat=unix
 
+au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm, *.njk set ft=jinja
+
 " close fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
@@ -519,11 +534,20 @@ au BufRead,BufNewFile *.pcss set filetype=css
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 :set diffopt=vertical
 
+
 " COLORS
+
+let g:solarized_termcolors=256
 
 :set t_Co=256 " 256 colors
 :set cursorline
 :set colorcolumn=120
 :set cursorcolumn
-:set background=dark
-colorscheme railscasts
+
+let hour = strftime("%H")
+if 5 <= hour && hour < 21
+  set background=light
+else
+  set background=dark
+end
+colorscheme gruvbox
