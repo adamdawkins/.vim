@@ -180,7 +180,7 @@ map <leader>gu :GundoToggle<CR>
 
 map <leader>j :wa\|execute ':silent !npm run webpack --mode production' \| execute ':redraw!' \| :silent !reload-chrome<cr>
 
-:map <leader>l :RExtractLet<cr>
+:map <leader>l :PromoteToLet<cr>
 
 map <leader>m :call MkDir()<cr>
 
@@ -282,6 +282,15 @@ set winwidth=126 " the 120 + some space for the line numbers and linting bar  ¯
 " make directory for current file
 function MkDir()
   exe '!mkdir -p %:h'
+endfunction
+
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+  :command! PromoteToLet :call PromoteToLet()
 endfunction
 
 
