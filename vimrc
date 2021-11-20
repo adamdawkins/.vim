@@ -26,6 +26,8 @@ Plugin 'easymotion/vim-easymotion'
 " Table Mode
 Plugin 'dhruvasagar/vim-table-mode'
 
+Plugin 'emugel/vim-sum'
+
 " A scratch file
 Plugin 'vim-scripts/scratch.vim'
 
@@ -97,6 +99,7 @@ Plugin 'niftylettuce/vim-jinja'
 
 "      Ruby
 Plugin 'joker1007/vim-ruby-heredoc-syntax'
+Plugin 'despo/vim-ruby-refactoring'
 
 "      SQL
 Plugin 'vim-scripts/SQLUtilities'
@@ -124,8 +127,6 @@ Plugin 'christoomey/vim-tmux-runner'
 " " Undo History
 Plugin 'sjl/gundo.vim'
 
-" Colorscheme
-Plugin 'jpo/vim-railscasts-theme'
 Plugin 'morhetz/gruvbox'
 
 call vundle#end()
@@ -152,6 +153,9 @@ nmap <leader>3 :b#<cr>
 " map ,. to switch between test/production
 nmap <leader>. :A<cr>
 
+nmap <leader>a <Plug>VimSumOperatorPending
+vmap <leader>a <Plug>VimSumVisual
+
 " ctrl p for current buffers
 map <leader>b :CtrlPBuffer<cr>
 
@@ -176,7 +180,7 @@ map <leader>gu :GundoToggle<CR>
 
 map <leader>j :wa\|execute ':silent !npm run webpack --mode production' \| execute ':redraw!' \| :silent !reload-chrome<cr>
 
-:map <leader>l :PromoteToLet<cr>
+:map <leader>l :RExtractLet<cr>
 
 map <leader>m :call MkDir()<cr>
 
@@ -222,13 +226,14 @@ let g:ale_javascript_prettier_use_global = 1
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'ruby': ['standardrb'],
+\   'javascript': ['prettier'],
+\   'ruby': ['rubocop']
 \}
 
 let g:ale_linters = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier'],
-\   'ruby': ['standardrb'],
+\   'ruby': ['rubocop'],
 \   'scss': [],
 \   'css': [],
 \}
@@ -271,7 +276,7 @@ set smartcase " searches case insensitive with lower-case letters, but sensitive
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
-set winwidth=120
+set winwidth=126 " the 120 + some space for the line numbers and linting bar  ¯\_(ツ)_/¯
 
 
 " make directory for current file
@@ -287,10 +292,10 @@ endfunction
 " Test running here is contextual in two different ways:
 "
 " 1. It will guess at how to run the tests. E.g., if there's a Gemfile
-"    present, it will `bundle exec rspec` so the gems are respected.
+"    present, it will `bundle exec rails test` so the gems are respected.
 "
 " 2. It remembers which tests have been run. E.g., if I'm editing user_spec.rb
-"    and hit enter, it will run rspec on user_spec.rb. If I then navigate to a
+"    and hit enter, it will run rails test on user_spec.rb. If I then navigate to a
 "    non-test file, like routes.rb, and hit return again, it will re-run
 "    user_spec.rb. It will continue using user_spec.rb as my 'default' test
 "    until I hit enter in some other test file, at which point that test file
@@ -300,7 +305,7 @@ endfunction
 "    enter in.
 "
 " 3. Sometimes you want to run just one test. For that, there's <leader>T,
-"    which passes the current line number to the test runner. RSpec knows what
+"    which passes the current line number to the test runner. rails test knows what
 "    to do with this (it will run the first test it finds at or below the
 "    given line number). It probably won't work with other test runners.
 "    'Focusing' on a single test in this way will be remembered if you hit
@@ -358,15 +363,15 @@ function! RunTests(filename)
 		" Project-specific test script
 	elseif filereadable("bin/test")
 		exec ":call Fifo('bin/test " . a:filename . "')"
-		" Rspec binstub
-	elseif filereadable("bin/rspec")
-		exec ":call Fifo('bundle exec rspec --format documentation --fail-fast " . a:filename . "')"
+		" rails test binstub
+	elseif filereadable("bin/rails test")
+		exec ":call Fifo('bundle exec rails test --format documentation --fail-fast " . a:filename . "')"
 	elseif filereadable("script/cucumber")
 		exec ":call Fifo('bundle exec script/cucumber " . a:filename . "')"
 		" Fall back to the .test-commands pipe if available, assuming someone
 		" is reading the other side and running the commands
 	elseif filewritable(".test-commands")
-		let cmd = 'bundle exec rspec --color --format documentation --require "~/lib/vim_rspec_formatter" --format VimFormatter --fail-fast --out tmp/quickfix'
+		let cmd = 'bundle exec rails test --color --format documentation --require "~/lib/vim_rails test_formatter" --format VimFormatter --fail-fast --out tmp/quickfix'
 		exec ":!echo " . cmd . " " . a:filename . " > .test-commands"
 
 		" Write an empty string to block until the command completes
@@ -374,10 +379,10 @@ function! RunTests(filename)
 		:!echo > .test-commands
 		redraw!
 		" Fall back to a blocking test run with Bundler
-	elseif filereadable("bin/rspec")
-		exec ":call Fifo('bin/rspec --color --fail-fast " . a:filename . "')"
+	elseif filereadable("bin/rails test")
+		exec ":call Fifo('bin/rails test --color --fail-fast " . a:filename . "')"
 	elseif filereadable("Gemfile") && strlen(glob("spec/**/*.rb"))
-		exec ":call Fifo('bundle exec rspec --format documentation --color --fail-fast " . a:filename . "')"
+		exec ":call Fifo('bundle exec rails test --format documentation --color --fail-fast " . a:filename . "')"
 	elseif filereadable("Gemfile") && strlen(glob("test/**/*.rb"))
 		exec ":call Fifo('ruby " . a:filename . "')"
 	end
@@ -472,18 +477,6 @@ function! Fifo(cmd)
   :redraw!
 endfunction
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PROMOTE VARIABLE TO RSPEC LET
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! PromoteToLet()
-  :normal! dd
-  " :exec '?^\s*it\>'
-  :normal! P
-  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
-  :normal ==
-endfunction
-:command! PromoteToLet :call PromoteToLet()
-
 
 " editor settings
 set shiftwidth=2
@@ -545,7 +538,7 @@ let g:solarized_termcolors=256
 :set cursorcolumn
 
 let hour = strftime("%H")
-if 5 <= hour && hour < 21
+if 5 <= hour && hour < 17
   set background=light
 else
   set background=dark
